@@ -1,0 +1,22 @@
+<?xml version="1.0" ?><tool id="callSubclone" name="subclone caller for BayClone3" version="1.1">
+<requirements>
+    <container type="docker">docker.synapse.org/syn2813581/5964755/bayclone3</container>
+</requirements>
+<stdio>
+    <exit_code range="1:"/>
+</stdio>
+<command><![CDATA[
+    Rscript /opt/BayClone3/BayClone3-CC-v2_dream.R ${input_file}
+]]></command>
+<inputs>
+    <param format="txt" label="BayClone3_input" name="input_file" type="data"/>
+</inputs>
+<outputs>
+    <data format="txt" from_work_dir="subchallenge1A.txt" label="Cellularity (Sub Challenge 1A)" name="cellularity"/>
+    <data format="txt" from_work_dir="subchallenge1B.txt" label="Number of Clusters (Sub Challenge 1B)" name="no_clusters"/>
+    <data format="txt" from_work_dir="subchallenge1C.txt" label="Cluster sizes and proportions (Sub Challenge 1C)" name="cluster_size"/>
+</outputs>
+<help><![CDATA[
+    R module to reconstruct subclonal architecture
+]]></help>
+</tool>

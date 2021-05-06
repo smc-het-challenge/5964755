@@ -1,0 +1,21 @@
+<?xml version="1.0" ?><tool id="parseInput" name="input parser for BayClone3" version="1.1">
+<requirements>
+    <container type="docker">docker.synapse.org/syn2813581/5964755/bayclone3</container>
+</requirements>
+<stdio>
+    <exit_code range="1:"/>
+</stdio>
+<command><![CDATA[
+    /opt/BayClone3/parseInputData ${vcf_file} ${BB_file}
+]]></command>
+<inputs>
+    <param format="vcf" label="VCF Data" name="vcf_file" type="data"/>
+    <param format="tabular" label="CNV Data" name="BB_file" type="data"/>
+</inputs>
+<outputs>
+    <data format="txt" from_work_dir="BayClone3_input.txt" label="input to BayClone3" name="inputDataForSubcloneCaller"/>
+</outputs>
+<help><![CDATA[
+    C++ module to extract data from VCF and Battenberg files
+]]></help>
+</tool>

@@ -1,0 +1,180 @@
+{
+    "a_galaxy_workflow": "true", 
+    "format-version": "0.1", 
+    "name": "BayClone3_workflow", 
+    "steps": {
+        "1": {
+            "inputs": [
+                {
+                    "description": "CNA data", 
+                    "name": "CNA_INPUT"
+                }
+            ], 
+            "uuid": "e54df8d2-404f-4545-83ec-014e5380ad08", 
+            "user_outputs": [], 
+            "tool_id": null, 
+            "outputs": [], 
+            "tool_version": null, 
+            "annotation": "CNA data", 
+            "input_connections": {}, 
+            "tool_errors": null, 
+            "position": {
+                "top": 329.3833312988281, 
+                "left": 204
+            }, 
+            "tool_state": "{\"name\": \"CNA_INPUT\"}", 
+            "label": null, 
+            "type": "data_input", 
+            "id": 1, 
+            "name": "Input dataset"
+        }, 
+        "0": {
+            "inputs": [
+                {
+                    "description": "SNV data", 
+                    "name": "VCF_INPUT"
+                }
+            ], 
+            "uuid": "78b33114-e8ef-4c90-a5dd-d750f159ef64", 
+            "user_outputs": [], 
+            "tool_id": null, 
+            "outputs": [], 
+            "tool_version": null, 
+            "annotation": "SNV data", 
+            "input_connections": {}, 
+            "tool_errors": null, 
+            "position": {
+                "top": 233.38333129882812, 
+                "left": 205
+            }, 
+            "tool_state": "{\"name\": \"VCF_INPUT\"}", 
+            "label": null, 
+            "type": "data_input", 
+            "id": 0, 
+            "name": "Input dataset"
+        }, 
+        "3": {
+            "tool_id": "callSubclone", 
+            "uuid": "4feba1be-69a8-49ab-9dc6-1902b045e9c9", 
+            "user_outputs": [], 
+            "tool_version": "1.0.0", 
+            "outputs": [
+                {
+                    "type": "txt", 
+                    "name": "cellularity"
+                }, 
+                {
+                    "type": "txt", 
+                    "name": "no_clusters"
+                }, 
+                {
+                    "type": "txt", 
+                    "name": "cluster_size"
+                }
+            ], 
+            "post_job_actions": {}, 
+            "annotation": "", 
+            "input_connections": {
+                "input_file": {
+                    "output_name": "inputDataForSubcloneCaller", 
+                    "id": 2
+                }
+            }, 
+            "inputs": [], 
+            "tool_errors": null, 
+            "position": {
+                "top": 244, 
+                "left": 696.5
+            }, 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"input_file\": \"null\"}", 
+            "label": null, 
+            "type": "tool", 
+            "id": 3, 
+            "name": "subclone caller for BayClone3"
+        }, 
+        "2": {
+            "tool_id": "parseInput", 
+            "uuid": "43ce2ded-a28c-4783-a96f-0429eb35a4d6", 
+            "user_outputs": [], 
+            "tool_version": "1.0.0", 
+            "outputs": [
+                {
+                    "type": "txt", 
+                    "name": "inputDataForSubcloneCaller"
+                }
+            ], 
+            "post_job_actions": {}, 
+            "annotation": "", 
+            "input_connections": {
+                "vcf_file": {
+                    "output_name": "output", 
+                    "id": 0
+                }, 
+                "BB_file": {
+                    "output_name": "output", 
+                    "id": 1
+                }
+            }, 
+            "inputs": [], 
+            "tool_errors": null, 
+            "position": {
+                "top": 264, 
+                "left": 414.5
+            }, 
+            "tool_state": "{\"__page__\": 0, \"BB_file\": \"null\", \"__rerun_remap_job_id__\": null, \"vcf_file\": \"null\"}", 
+            "label": null, 
+            "type": "tool", 
+            "id": 2, 
+            "name": "input parser for BayClone3"
+        }, 
+        "4": {
+            "tool_id": "smc_het_eval", 
+            "uuid": "b98a3e27-15ea-40ca-a44f-aeee77ba87c3", 
+            "user_outputs": [], 
+            "tool_version": "0.1.0", 
+            "outputs": [
+                {
+                    "type": "txt", 
+                    "name": "outfile"
+                }
+            ], 
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "output_name": "outfile", 
+                    "action_type": "RenameDatasetAction", 
+                    "action_arguments": {
+                        "newname": "OUTPUT"
+                    }
+                }
+            }, 
+            "annotation": "", 
+            "input_connections": {
+                "proportion|predfile": {
+                    "output_name": "cluster_size", 
+                    "id": 3
+                }, 
+                "cellularity|predfile": {
+                    "output_name": "cellularity", 
+                    "id": 3
+                }, 
+                "population|predfile": {
+                    "output_name": "no_clusters", 
+                    "id": 3
+                }
+            }, 
+            "inputs": [], 
+            "tool_errors": null, 
+            "position": {
+                "top": 141.38333129882812, 
+                "left": 965
+            }, 
+            "tool_state": "{\"cocluster_assignment\": \"{\\\"submit\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"proportion\": \"{\\\"predfile\\\": null, \\\"submit\\\": \\\"yes\\\", \\\"__current_case__\\\": 0}\", \"sample\": \"\\\"/opt/galaxy/data/Tumour3/Tumour3\\\"\", \"cellularity\": \"{\\\"predfile\\\": null, \\\"submit\\\": \\\"yes\\\", \\\"__current_case__\\\": 0}\", \"cluster_assignment\": \"{\\\"submit\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"population\": \"{\\\"predfile\\\": null, \\\"submit\\\": \\\"yes\\\", \\\"__current_case__\\\": 0}\"}", 
+            "label": null, 
+            "type": "tool", 
+            "id": 4, 
+            "name": "SMC-Het Evaluator"
+        }
+    }, 
+    "annotation": "parse data and run subclone caller", 
+    "uuid": "1dd1f5f8-6b2d-4346-b440-b730dec04ed4"
+}
